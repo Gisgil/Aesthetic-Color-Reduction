@@ -10,7 +10,7 @@ import static Constants.UserMessagesConstants.GET_OPERATION_ORDER_MESSAGE;
 //todo mask
 //todo correct folder output name
 
-public class AutoColorReduction {
+public class AestheticColorReduction {
 
     private static BufferedImage image;
 

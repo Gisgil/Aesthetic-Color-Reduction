@@ -7,6 +7,7 @@ public class UserMessagesConstants {
     public static final String GET_IMAGE_PATHNAME_MESSAGE = "Which image do you want to reduce?";
     public static final String GET_OPERATION_ORDER_MESSAGE = "In what order do you want to change your image? (" + REDUCTION_CHAR + "- Reduction | " + CLUSTER_CHAR + "- Clustering | " + BLUR_CHAR + " - Blur | " + ALL_EDITING_STRING + " - All Combinations | Blank - " + DEFAULT_EDITING_OPTION + ")";
     public static final String GET_BLACK_AND_WHITE_MESSAGE = "Do you want your image to become black and white or stay in color? (y for black and white, n for color)";
+    public static final String GET_BLUR_SIZE_MESSAGE = "How much should your image be blurred? (default 5)";
     public static final String WRONG_INPUT_MESSAGE = "Invalid input, please try again";
 
     //USER INPUT MESSAGES NOT IN USE

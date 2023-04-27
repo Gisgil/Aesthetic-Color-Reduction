@@ -71,7 +71,7 @@ public class Constants {
     public static boolean KEEP_SAME_TRANSPARENCY_MODE = false;
 
     //AESTHETIC CLUSTERING
-    public static int AESTHETIC_CLUSTERING_SIZE = 1;
+    public static int AESTHETIC_CLUSTERING_SIZE = 2;
     public static int MAX_NUMBER_OF_AESTHETIC_CLUSTERS = 1000;
 
     //BLUR

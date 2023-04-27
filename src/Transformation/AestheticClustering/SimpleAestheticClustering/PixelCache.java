@@ -3,13 +3,18 @@ package Transformation.AestheticClustering.SimpleAestheticClustering;
 import static Constants.Constants.DEBUG_MODE;
 
 public class PixelCache implements PixelCacheInterface {
-    //private static final boolean DEBUG_MODE = false;
-    private int[] pixelCache = new int[5];
-    private int[] pixelCounter = new int[5];
+    private int[] pixelCache = new int[0];
+    private int[] pixelCounter = new int[0];
     private int arrayIndex = 0;
 
     @Override
     public void addPixel(int[] pixel) {
+        if (pixel.length > pixelCache.length){
+            pixelCache = new int[pixel.length];
+            pixelCounter = new int[pixel.length];
+            arrayIndex = 0;
+        }
+
         for (int p : pixel) {
             addPixelToCache(p);
         }

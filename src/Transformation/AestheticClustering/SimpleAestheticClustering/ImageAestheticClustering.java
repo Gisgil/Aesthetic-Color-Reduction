@@ -1,6 +1,7 @@
 package Transformation.AestheticClustering.SimpleAestheticClustering;
 
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 
 import static Constants.ANSIConstants.*;
 import static Constants.Constants.*;
@@ -48,7 +49,6 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
             System.out.println(ANSI_ERROR + "ERROR Differing lengths of array, width and height" + ANSI_RESET);
             return pixels;
         }
-
         //0 pixel, 1 top, 2, right, 3 down, 4 left
         int[] p = new int[5];
 
@@ -61,20 +61,20 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
         PIXEL_CACHE.clearPixels();
 
         int index;
-        for (int row = 0; row < width; row++) { //y
-            for (int column = 0; column < height; column++) { //x
+        for (int x = 0; x < width; x++) { //y
+            for (int y = 0; y < height; y++) { //x
 
-                index = IMAGE_TRANSFORMATION_HELPER.indexCalculator(width, height, column, row);
+                index = IMAGE_TRANSFORMATION_HELPER.indexCalculator(width, height, x, y);
                 //pixel
                 p[0] = pixels[index];
                 //pTOP
-                p[1] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column, row - 1, pixels);
+                p[1] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y - 1, pixels);
                 //pRight
-                p[2] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column + 1, row, pixels);
+                p[2] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y, pixels);
                 //pDown
-                p[3] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column, row + 1, pixels);
+                p[3] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y + 1, pixels);
                 //pLeft
-                p[4] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column - 1, row, pixels);
+                p[4] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y, pixels);
 
                 PIXEL_CACHE.addPixel(p);
 
@@ -82,6 +82,7 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
                 PIXEL_CACHE.clearPixels();
             }
         }
+
         if (DEBUG_MODE) {
             System.out.println("Fishined Aesthetic Clustering from Array, returning Array");
         }
@@ -99,6 +100,8 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
             return pixels;
         }
 
+        int[] result = Arrays.copyOf(pixels, pixels.length);
+
         int[] p = new int[9];
 
         /*
@@ -110,24 +113,32 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
         PIXEL_CACHE.clearPixels();
 
         int index;
-        for (int row = 0; row < width; row++) { //y
-            for (int column = 0; column < height; column++) { //x
+        for (int x = 0; x < width; x++) { //x
+            for (int y = 0; y < height; y++) { //y
 
-                index = IMAGE_TRANSFORMATION_HELPER.indexCalculator(width, height, column, row);
+                index = IMAGE_TRANSFORMATION_HELPER.indexCalculator(width, height, x, y);
                 //pixel
                 p[0] = pixels[index];
                 //pTOP
-                p[1] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column, row - 1, pixels);
+                p[1] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y - 1, pixels);
+                //pTopRight
+                p[2] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y - 1, pixels);
                 //pRight
-                p[2] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column + 1, row, pixels);
+                p[3] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y, pixels);
+                //pRightDown
+                p[4] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y + 1, pixels);
                 //pDown
-                p[3] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column, row + 1, pixels);
+                p[5] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y + 1, pixels);
+                //pDownLeft
+                p[6] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y + 1, pixels);
                 //pLeft
-                p[4] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column - 1, row, pixels);
+                p[7] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y, pixels);
+                //pLeftUP
+                p[8] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y - 1, pixels);
 
                 PIXEL_CACHE.addPixel(p);
 
-                pixels[index] = PIXEL_CACHE.returnSelectedPixel();
+                result[index] = PIXEL_CACHE.returnSelectedPixel();
                 PIXEL_CACHE.clearPixels();
             }
         }
@@ -135,7 +146,7 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
             System.out.println("Fishined Aesthetic Clustering from Array, returning Array");
         }
 
-        return pixels;
+        return result;
     }
 
 
@@ -147,6 +158,7 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
             System.out.println(ANSI_ERROR + "ERROR Differing lengths of array, width and height" + ANSI_RESET);
             return pixels;
         }
+        int[] result = Arrays.copyOf(pixels, pixels.length);
 
         int[] p = new int[21];
 
@@ -161,24 +173,56 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
         PIXEL_CACHE.clearPixels();
 
         int index;
-        for (int row = 0; row < width; row++) { //y
-            for (int column = 0; column < height; column++) { //x
+        for (int x = 0; x < width; x++) { //y
+            for (int y = 0; y < height; y++) { //x
 
-                index = IMAGE_TRANSFORMATION_HELPER.indexCalculator(width, height, column, row);
+                index = IMAGE_TRANSFORMATION_HELPER.indexCalculator(width, height, x, y);
                 //pixel
                 p[0] = pixels[index];
                 //pTOP
-                p[1] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column, row - 1, pixels);
+                p[1] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y - 1, pixels);
+                //pTopTop
+                p[2] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y - 2, pixels);
+                //pTopTopRight
+                p[3] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y - 2, pixels);
+                //pTopRight
+                p[4] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y - 1, pixels);
+                //pTopRightRight
+                p[5] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 2, y - 1, pixels);
+                //pRightRight
+                p[6] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 2, y, pixels);
                 //pRight
-                p[2] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column + 1, row, pixels);
+                p[7] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y, pixels);
+                //pRightRightDown
+                p[8] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 2, y + 1, pixels);
+                //pRightDown
+                p[9] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y + 1, pixels);
+                //pRightDownDown
+                p[10] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x + 1, y + 2, pixels);
+                //pDownDown
+                p[11] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y + 2, pixels);
                 //pDown
-                p[3] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column, row + 1, pixels);
+                p[12] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x, y + 1, pixels);
+                //pDownDownLeft
+                p[13] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y + 2, pixels);
+                //pDownLeft
+                p[14] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y + 1, pixels);
+                //pDownLeftLeft
+                p[15] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 2, y + 1, pixels);
+                //pLeftLeft
+                p[16] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 2, y, pixels);
                 //pLeft
-                p[4] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, column - 1, row, pixels);
+                p[17] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y, pixels);
+                //pLeftLeftUP
+                p[18] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 2, y + 1, pixels);
+                //pLeftUP
+                p[19] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y + 1, pixels);
+                //pLeftUPUP
+                p[20] = IMAGE_TRANSFORMATION_HELPER.indexCalculatorAutomaticPixelReturn(width, height, x - 1, y + 2, pixels);
 
                 PIXEL_CACHE.addPixel(p);
 
-                pixels[index] = PIXEL_CACHE.returnSelectedPixel();
+                result[index] = PIXEL_CACHE.returnSelectedPixel();
                 PIXEL_CACHE.clearPixels();
             }
         }
@@ -186,6 +230,6 @@ public class ImageAestheticClustering implements ImageAestheticClusteringInterfa
             System.out.println("Fishined Aesthetic Clustering from Array, returning Array");
         }
 
-        return pixels;
+        return result;
     }
 }

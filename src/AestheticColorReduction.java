@@ -3,8 +3,7 @@ import Transformation.Comparator.Comparator;
 import java.awt.image.BufferedImage;
 
 import static Constants.Constants.*;
-import static Constants.UserMessagesConstants.GET_BLACK_AND_WHITE_MESSAGE;
-import static Constants.UserMessagesConstants.GET_OPERATION_ORDER_MESSAGE;
+import static Constants.UserMessagesConstants.*;
 
 //todo Multithreaded transformations (and then multithreaded all combinations)
 //todo mask
@@ -18,11 +17,10 @@ public class AestheticColorReduction {
         USER_INPUT_HANDLER.processArgs(args);
         if (ARGS_INPUT) {
             image = FILE_HANDLER.getImageFromPathname();
+            OPERATION_ORDER = validateOperationOrder();
         } else {
             getUserInputConstants();
         }
-
-        OPERATION_ORDER = validateOperationOrder();
 
         if (STORE_DIFFERENCES) {
             COMPARATOR = new Comparator();
@@ -44,12 +42,15 @@ public class AestheticColorReduction {
 
         OPERATION_ORDER = USER_INPUT_HANDLER.getStringUserInput(GET_OPERATION_ORDER_MESSAGE);
 
+        if (!DO_EXPANDED_INPUT) return;
+
         DO_BLACK_AND_WHITE = USER_INPUT_HANDLER.getBooleanUserInput(GET_BLACK_AND_WHITE_MESSAGE);
 
-        if (!DO_EXPANDED_INPUT) return;
-        //Number Calculator currently not implemented
-        //NUMBER_OF_COLORS = USER_INPUT_HANDLER.getIntUserInput(GET_NUMBER_OF_COLORS_MESSAGE);
+        OPERATION_ORDER = validateOperationOrder();
 
+        if (OPERATION_ORDER.contains("B")) {
+            BLUR_SIZE = USER_INPUT_HANDLER.getIntUserInput(GET_BLUR_SIZE_MESSAGE);
+        }
     }
 
     private static String validateOperationOrder() {
@@ -68,8 +69,7 @@ public class AestheticColorReduction {
             if (containsChar(i)) {
                 continue;
             }
-            //todo fix
-            //OPERATION_ORDER = OPERATION_ORDER.replaceAll("" + i, "");
+            OPERATION_ORDER = OPERATION_ORDER.replaceAll(String.valueOf(i), "");
         }
         return OPERATION_ORDER;
     }

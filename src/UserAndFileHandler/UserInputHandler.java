@@ -5,8 +5,7 @@ import Constants.ANSIConstants;
 import java.io.File;
 
 import static Constants.Constants.*;
-import static Constants.UserMessagesConstants.GET_IMAGE_PATHNAME_MESSAGE;
-import static Constants.UserMessagesConstants.WRONG_INPUT_MESSAGE;
+import static Constants.UserMessagesConstants.*;
 
 public class UserInputHandler implements UserInputHandlerInterface {
     @Override
@@ -153,9 +152,13 @@ public class UserInputHandler implements UserInputHandlerInterface {
 
     private void switchStatementForArgs(String argument) {
         switch (argument) {
-            case "-reducedinput", "-r", "-reduced", "-ri", "reduced_input" -> DO_EXPANDED_INPUT = true;
+            case "-help", "-h" -> {
+                System.out.println(HELP_MESSAGE);
+                System.exit(0);
+            }
+            case "-reduced-input", "-r", "-reduced", "-ri", "reduced_input" -> DO_EXPANDED_INPUT = true;
             case "-debug_mode", "-debug-mode", "-debugmode", "-debug", "-d" -> DEBUG_MODE = true;
-            case "-blackandwhite", "black&white", "-baw", "-bw" -> DO_BLACK_AND_WHITE = true;
+            case "-black-and-white", "-blackandwhite", "black&white", "-baw", "-bw" -> DO_BLACK_AND_WHITE = true;
         }
     }
 }

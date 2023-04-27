@@ -4,11 +4,6 @@ import java.awt.image.BufferedImage;
 
 import static Constants.Constants.*;
 import static Constants.UserMessagesConstants.*;
-
-//todo Multithreaded transformations (and then multithreaded all combinations)
-//todo mask
-//todo correct folder output name
-
 public class AestheticColorReduction {
 
     private static BufferedImage image;

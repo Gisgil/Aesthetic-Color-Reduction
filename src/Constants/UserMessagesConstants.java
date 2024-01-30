@@ -13,12 +13,11 @@ public class UserMessagesConstants {
     //HELP MESSAGE
     public static final String HELP_MESSAGE = "Takes in an image and applies up to 3 different transformations to it\n" +
             "Possible Arguments:\n" +
-            "File path, either relative \"./image.png\" or absolute \"user/folder/image.png\"\n" +
+            "\"-image\", \"-i\" followed by \"example.png\" (without spaces)\n" +
             "\"-help\", \"-h\" to see this message\n" +
-            "\"-black-and-white\", \"-baw\" to make this image black & white" +
+            "\"-black-and-white\", \"-baw\" to make this image black & white\n" +
             "\"-reduced-input\", \"-ri\" to use default settings without further user input\n" +
-            "\"-debug-mode\", \"-d\" to see further information about program on runtime\n" +
-            "";
+            "\"-debug-mode\", \"-d\" to see further information about program on runtime\n";
 
     //USER INPUT MESSAGES NOT IN USE
     public static final String GET_NUMBER_OF_COLORS_MESSAGE = "To how many colors do you want to reduce your image to?";

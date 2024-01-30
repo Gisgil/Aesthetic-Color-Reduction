@@ -6,7 +6,7 @@ public interface UserInputHandlerInterface {
     String generatePathname(String suffix, String folderName);
 
     int getIntUserInput(String message);
-    String getStringUserInput(String message);
+    String getNextLine (String message);
 
     boolean getBooleanUserInput(String message);
 

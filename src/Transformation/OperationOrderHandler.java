@@ -20,7 +20,7 @@ public class OperationOrderHandler implements OperationOrderHandlerInterface {
         stringStack = new Stack<>();
         stackSize = 0;
 
-        recursiveStringImplementations("", ALL_EDITING_OPTIONS.length);
+        recursiveStringImplementations("", ALL_EDITING_OPTIONS.length());
 
         String[] stringArr = stringStack.toArray(new String[stackSize]);
         for (String string : stringArr) {
@@ -45,7 +45,7 @@ public class OperationOrderHandler implements OperationOrderHandlerInterface {
             return;
         }
 
-        for (char option : Constants.ALL_EDITING_OPTIONS) {
+        for (char option : Constants.ALL_EDITING_OPTIONS.toCharArray()) {
             if (prefix.contains("" + option)) {
                 continue;
             }

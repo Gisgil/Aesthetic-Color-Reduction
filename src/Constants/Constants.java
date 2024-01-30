@@ -46,8 +46,9 @@ public class Constants {
     //INPUT OPTIONS
     public static String OPERATION_ORDER = "";
     public static boolean DEBUG_MODE = false;
+    public static boolean RESULT_FOLDER = false;
     public static boolean LOGGER_MODE = true;
-    public static boolean DO_EXPANDED_INPUT = false;
+    public static boolean DO_REDUCED_INPUT = false;
     public static boolean ARGS_INPUT = false;
 
     //PATHNAMES
@@ -58,13 +59,13 @@ public class Constants {
     //EDITIING OPTIONS
     public static final String DEFAULT_EDITING_OPTION = "BRC";
     public static final String ALL_EDITING_STRING = "ALL";
-    public static final char[] ALL_EDITING_OPTIONS = {'R', 'C', 'B'}; //equal to the chars below
+    public static final String ALL_EDITING_OPTIONS = "RCB"; //equal to the chars below
     public static final char REDUCTION_CHAR = 'R';
     public static final char BLUR_CHAR = 'B';
     public static final char CLUSTER_CHAR = 'C';
     public static final char DIFFERENCE_CHAR = 'D';
     //STORING
-    public static boolean STORE_DIFFERENCES = true;
+    public static boolean STORE_DIFFERENCES = false;
     //REDUCTION
     public static boolean DO_BLACK_AND_WHITE = false;
     public static int NUMBER_OF_COLORS = 0;

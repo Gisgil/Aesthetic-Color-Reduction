@@ -73,7 +73,7 @@ public class Constants {
 
     //AESTHETIC CLUSTERING
     public static int AESTHETIC_CLUSTERING_SIZE = 2;
-    public static int MAX_NUMBER_OF_AESTHETIC_CLUSTERS = 1000;
+    public static int MAX_NUMBER_OF_AESTHETIC_CLUSTERS = 128;
 
     //BLUR
     public static int BLUR_SIZE = 3;

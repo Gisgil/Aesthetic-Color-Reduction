@@ -9,7 +9,7 @@ public class NumberOfColorCalculator implements NumberOfColorCalculatorInterface
         if (LOGGER_MODE) {
             System.out.println("Calculating the color offset for " + ANSI_HIGHLIGHT_COLOR + numberOfColors + ANSI_RESET + " colors");
         }
-        int colorOffset = 51;
+        int colorOffset = 17;
         if (LOGGER_MODE) {
             System.out.println("Color offset: " + ANSI_HIGHLIGHT_COLOR + colorOffset + ANSI_RESET);
         }

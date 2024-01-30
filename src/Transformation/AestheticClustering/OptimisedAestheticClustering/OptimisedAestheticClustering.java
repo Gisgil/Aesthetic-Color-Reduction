@@ -35,10 +35,12 @@ public class OptimisedAestheticClustering implements OptimisedAestheticClusterin
         COMPARATOR_FOR_OPTIMISING.addPixels(pixels);
 
         for (int i = 0; i < MAX_NUMBER_OF_AESTHETIC_CLUSTERS; i++) {
+//            System.out.print(i+" ");
             pixels = IMAGE_AESTHETIC_CLUSTER.clustering(Arrays.copyOf(pixels, pixels.length), width, height);
             COMPARATOR_FOR_OPTIMISING.addPixels(pixels);
             clusteringCounter++;
             if (!COMPARATOR_FOR_OPTIMISING.containsDifferences()) {
+//                System.out.println();
                 break;
             }
         }

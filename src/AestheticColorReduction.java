@@ -62,8 +62,9 @@ private static void getUserInputConstants () {
 
     if (DO_REDUCED_INPUT)
         return;
-
-    DO_BLACK_AND_WHITE = USER_INPUT_HANDLER.getBooleanUserInput(GET_BLACK_AND_WHITE_MESSAGE);
+    if (OPERATION_ORDER.contains("R")) {
+        DO_BLACK_AND_WHITE = USER_INPUT_HANDLER.getBooleanUserInput(GET_BLACK_AND_WHITE_MESSAGE);
+    }
 
 
     if (OPERATION_ORDER.contains("B")) {
